@@ -1,21 +1,12 @@
 import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
-import Twitter from "next-auth/providers/twitter";
-import Facebook from "next-auth/providers/facebook";
+import Auth0 from "next-auth/providers/auth0";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    Google({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
-    }),
-    Twitter({
-      clientId: process.env.AUTH_TWITTER_ID,
-      clientSecret: process.env.AUTH_TWITTER_SECRET,
-    }),
-    Facebook({
-      clientId: process.env.AUTH_FACEBOOK_ID,
-      clientSecret: process.env.AUTH_FACEBOOK_SECRET,
+    Auth0({
+      clientId: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      issuer: process.env.AUTH0_ISSUER,
     }),
   ],
   pages: {
@@ -24,22 +15,42 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   callbacks: {
     async jwt({ token, account, profile }) {
-      // On first sign-in, embed provider details in the JWT
+      // On first sign-in: sync with SPLITA backend to get an API token
       if (account) {
         token.provider = account.provider;
         token.providerAccountId = account.providerAccountId;
+
+        try {
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+          const res = await fetch(`${apiUrl}/api/v1/auth/sync`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              provider: account.provider,
+              provider_account_id: account.providerAccountId,
+              email: token.email,
+              name: token.name,
+              avatar_url: token.picture,
+            }),
+          });
+          if (res.ok) {
+            const json = await res.json();
+            token.backendToken = json?.data?.token as string | undefined;
+          }
+        } catch {
+          // Backend unavailable — sign-in still succeeds, API calls will fail until resolved
+        }
       }
       if (profile) {
-        token.picture = (profile as { picture?: string; profile_image_url?: string }).picture
-          ?? (profile as { picture?: string; profile_image_url?: string }).profile_image_url
-          ?? token.picture;
+        token.picture =
+          (profile as { picture?: string }).picture ?? token.picture;
       }
       return token;
     },
     async session({ session, token }) {
-      // Expose safe fields to the client session
       session.user.id = token.sub ?? "";
       session.user.provider = token.provider as string | undefined;
+      session.backendToken = token.backendToken as string | undefined;
       return session;
     },
   },
