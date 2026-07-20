@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useSession } from "next-auth/react";
 
 interface Collaborator {
   id: string;
@@ -69,6 +70,7 @@ function inputClass(error?: boolean) {
 }
 
 export default function SplitSheetForm() {
+  const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [mainArtist, setMainArtist] = useState("");
   const [masterOwner, setMasterOwner] = useState("");
@@ -169,24 +171,32 @@ export default function SplitSheetForm() {
         process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
       const res = await fetch(`${apiBase}/api/v1/split-sheets`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(session?.backendToken
+            ? { Authorization: `Bearer ${session.backendToken}` }
+            : {}),
+        },
         body: JSON.stringify(payload),
       });
 
       if (res.ok) {
-        const data = await res.json();
+        const json = await res.json();
+        const data = (json as { data?: { pdf_url?: string | null; status?: string } }).data;
         setResult({
           success: true,
           message:
             "Split sheet created! Collaborators will receive invitation emails shortly.",
-          pdfUrl: (data as { pdf_url?: string | null }).pdf_url ?? null,
-          status: (data as { status?: string }).status,
+          pdfUrl: data?.pdf_url ?? null,
+          status: data?.status,
         });
       } else {
         const err = await res.json().catch(() => ({}));
         setResult({
           success: false,
-          message: (err as { message?: string }).message ?? "Something went wrong. Please try again.",
+          message:
+            (err as { error?: { message?: string } }).error?.message ??
+            "Something went wrong. Please try again.",
         });
       }
     } catch {
