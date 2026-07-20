@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import SessionProvider from "@/components/providers/SessionProvider";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,15 +23,25 @@ export const metadata: Metadata = {
   title: "SPLITA — Split Sheets for African Music Creators",
   description:
     "SPLITA helps African musicians and producers create legally recognised split sheets and beat sale certificates in minutes. Trusted across South Africa and beyond.",
-  metadataBase: new URL("https://www.splita.co.za"),
+  keywords: [
+    "split sheet",
+    "music split sheet",
+    "beat sale certificate",
+    "music rights South Africa",
+    "African music creators",
+    "music publishing",
+    "royalty split",
+    "SPLITA",
+  ],
+  metadataBase: new URL("https://splita.co.za"),
   alternates: {
-    canonical: "https://www.splita.co.za",
+    canonical: "https://splita.co.za",
   },
   openGraph: {
     title: "SPLITA — Split Sheets for African Music Creators",
     description:
       "Create legally recognised split sheets and beat sale certificates — simple, affordable, and built for Africa.",
-    url: "https://www.splita.co.za",
+    url: "https://splita.co.za",
     siteName: "SPLITA",
     images: [
       {
@@ -52,22 +63,58 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#2C1810",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-ZA">
       <body
         className={`${inter.variable} ${playfair.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "SPLITA",
+                url: "https://splita.co.za",
+                logo: "https://splita.co.za/images/splita-logo.png",
+                description:
+                  "SPLITA helps African musicians and producers create legally recognised split sheets and beat sale certificates in minutes.",
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  email: "info@splita.co.za",
+                  contactType: "customer service",
+                },
+                areaServed: "ZA",
+                knowsLanguage: "en-ZA",
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "SPLITA",
+                url: "https://splita.co.za",
+              },
+            ]),
+          }}
+        />
         <SessionProvider>
           <Navbar />
           {children}
           <Footer />
           <ScrollToTop />
         </SessionProvider>
+        <Analytics />
       </body>
     </html>
   );

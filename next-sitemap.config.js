@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://www.splita.co.za",
+  siteUrl: "https://splita.co.za",
   generateRobotsTxt: true,
   sitemapSize: 5000,
   changefreq: "weekly",
