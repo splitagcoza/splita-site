@@ -5,6 +5,7 @@ import Footer from "@/components/sections/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import SessionProvider from "@/components/providers/SessionProvider";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -115,6 +116,7 @@ export default function RootLayout({
           <ScrollToTop />
         </SessionProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
