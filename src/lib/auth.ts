@@ -31,6 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               email: token.email,
               name: token.name,
               avatar_url: token.picture,
+              email_verified: (profile as { email_verified?: boolean })?.email_verified ?? false,
             }),
           });
           if (res.ok) {
