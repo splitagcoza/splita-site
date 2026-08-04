@@ -15,6 +15,12 @@ function DesktopAuthControl({ session, transparent }: Readonly<{ session: Sessio
   if (session) {
     return (
       <div className="hidden lg:flex items-center gap-3">
+        <Link
+          href="/dashboard"
+          className={`text-sm font-semibold transition-colors duration-150 ease-in-out hover:text-gold ${transparent ? "text-white" : "text-dark"}`}
+        >
+          Dashboard
+        </Link>
         {session.user?.image ? (
           <Image src={session.user.image} alt={session.user.name ?? "User avatar"} width={32} height={32} className="rounded-full ring-2 ring-gold" />
         ) : (
@@ -45,12 +51,21 @@ function DesktopAuthControl({ session, transparent }: Readonly<{ session: Sessio
 function MobileAuthControl({ session, closeMenu }: Readonly<{ session: Session | null; closeMenu: () => void }>) {
   if (session) {
     return (
-      <button
-        onClick={() => { signOut({ callbackUrl: "/" }); closeMenu(); }}
-        className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 ease-in-out px-5 py-2.5 text-sm border border-dark text-dark hover:bg-dark hover:text-white mt-2"
-      >
-        Sign Out
-      </button>
+      <div className="flex flex-col gap-2 mt-2">
+        <Link
+          href="/dashboard"
+          onClick={closeMenu}
+          className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 ease-in-out px-5 py-2.5 text-sm border border-[#1B4D3E] text-[#1B4D3E] hover:bg-[#1B4D3E] hover:text-white"
+        >
+          Dashboard
+        </Link>
+        <button
+          onClick={() => { signOut({ callbackUrl: "/" }); closeMenu(); }}
+          className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 ease-in-out px-5 py-2.5 text-sm border border-dark text-dark hover:bg-dark hover:text-white"
+        >
+          Sign Out
+        </button>
+      </div>
     );
   }
   return (
