@@ -1,15 +1,9 @@
-import DonateSection from "@/components/sections/DonateSection";
+import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Donate — SPLITA",
-  description:
-    "Support SPLITA and help us build legal tools that protect African music creators.",
+  title: "Contact Us — SPLITA",
 };
 
 export default function DonatePage() {
-  return (
-    <main className="pt-16">
-      <DonateSection />
-    </main>
-  );
+  redirect("/contact");
 }
