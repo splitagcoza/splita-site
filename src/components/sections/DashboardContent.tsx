@@ -102,7 +102,7 @@ function CollaboratorProgress({ collaborators }: Readonly<{ collaborators: Colla
 
 // ─── PDF Download ──────────────────────────────────────────────────────────────
 
-async function downloadPDF(id: string, title: string, token: string) {
+async function downloadPDF(id: string, token: string) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
   const res = await fetch(`${apiUrl}/api/v1/split-sheets/${id}/pdf`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -110,18 +110,13 @@ async function downloadPDF(id: string, title: string, token: string) {
   if (!res.ok) {
     const json = await res.json().catch(() => null);
     throw new Error(
-      (json?.error?.message as string | undefined) ?? "Failed to download PDF"
+      (json?.error?.message as string | undefined) ?? "Failed to get PDF URL"
     );
   }
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `${title.replace(/\s+/g, "-").toLowerCase()}-split-sheet.pdf`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+  const json = await res.json();
+  const pdfUrl = (json?.data?.pdf_url as string | undefined);
+  if (!pdfUrl) throw new Error("PDF URL not found in response");
+  window.open(pdfUrl, "_blank", "noopener,noreferrer");
 }
 
 // ─── Split Sheet Card ──────────────────────────────────────────────────────────
@@ -142,7 +137,7 @@ function SplitSheetCard({
     setDownloading(true);
     setDownloadError(null);
     try {
-      await downloadPDF(sheet.id, sheet.title, token);
+      await downloadPDF(sheet.id, token);
     } catch (err) {
       setDownloadError(err instanceof Error ? err.message : "Download failed");
     } finally {
@@ -322,20 +317,19 @@ function SkeletonCard() {
 // ─── Main component ────────────────────────────────────────────────────────────
 
 export default function DashboardContent() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const token = session?.backendToken;
 
   const [sheets, setSheets] = useState<SplitSheet[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const LIMIT = 10;
 
   const fetchSheets = useCallback(
     async (p: number) => {
-      if (!token) return;
       setLoading(true);
       setError(null);
       const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
@@ -348,7 +342,7 @@ export default function DashboardContent() {
         if (!res.ok) {
           throw new Error(
             (json?.error?.message as string | undefined) ??
-              "Failed to load split sheets"
+              `Request failed (${res.status})`
           );
         }
         setSheets(json.data?.split_sheets ?? []);
@@ -365,21 +359,38 @@ export default function DashboardContent() {
   );
 
   useEffect(() => {
+    // Wait until NextAuth has finished resolving the session
+    if (status === "loading") return;
     fetchSheets(page);
-  }, [fetchSheets, page]);
+  }, [fetchSheets, page, status]);
 
   const totalPages = Math.ceil(total / LIMIT);
 
-  // Waiting for session hydration
-  if (!token && !loading) {
+  // Session still resolving — show skeletons
+  if (status === "loading") {
     return (
-      <p className="text-sm text-gray-400 text-center py-16">
-        Session not found.{" "}
-        <Link href="/sign-in" className="underline text-dark">
-          Sign in again
+      <div className="space-y-4">
+        {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+      </div>
+    );
+  }
+
+  // Authenticated but no backend token — session needs refresh
+  if (status === "authenticated" && !token) {
+    return (
+      <div className="bg-amber-50 border border-amber-200 rounded-2xl px-8 py-10 text-center">
+        <p className="font-semibold text-amber-800 mb-1">Session needs a refresh</p>
+        <p className="text-sm text-amber-700 mb-5">
+          Your session is missing a backend token. Please sign out and sign back in to fix this.
+        </p>
+        <Link
+          href="/api/auth/signout"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-colors"
+          style={{ backgroundColor: "#1B4D3E" }}
+        >
+          Sign out &amp; back in
         </Link>
-        .
-      </p>
+      </div>
     );
   }
 
