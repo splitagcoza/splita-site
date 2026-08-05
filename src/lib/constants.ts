@@ -8,7 +8,6 @@ export const NAV_LINKS = [
   { label: "Pricing", href: "/pricing" },
   { label: "About Us", href: "/about" },
   { label: "Testimonies", href: "/testimonies" },
-  { label: "Donate", href: "/donate" },
   { label: "Contact Us", href: "/contact" },
 ];
 

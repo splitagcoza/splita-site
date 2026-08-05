@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { SITE_TAGLINE, SOCIAL_LINKS } from "@/lib/constants";
+import { SITE_TAGLINE, SOCIAL_LINKS, CONTACT_EMAIL } from "@/lib/constants";
 import Logo from "@/components/ui/Logo";
 
-const FORMSPREE_URL = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
 const SOCIALS = [
   {
@@ -67,14 +67,11 @@ export default function ContactSection() {
     if (!waitlistEmail.trim()) return;
     setWaitlistStatus("sending");
     try {
-      const res = await fetch(
-        FORMSPREE_URL || "https://formspree.io/f/placeholder",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ email: waitlistEmail, _subject: "Early Access Waitlist" }),
-        }
-      );
+      const res = await fetch(`${API_BASE}/api/waitlist`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: waitlistEmail }),
+      });
       setWaitlistStatus(res.ok ? "sent" : "error");
     } catch {
       setWaitlistStatus("error");
@@ -84,18 +81,21 @@ export default function ContactSection() {
   async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFormStatus("sending");
-    const data = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const data = new FormData(form);
     try {
-      const res = await fetch(
-        FORMSPREE_URL || "https://formspree.io/f/placeholder",
-        {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body: data,
-        }
-      );
+      const res = await fetch(`${API_BASE}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          subject: data.get("subject"),
+          message: data.get("message"),
+        }),
+      });
       setFormStatus(res.ok ? "sent" : "error");
-      if (res.ok) (e.target as HTMLFormElement).reset();
+      if (res.ok) form.reset();
     } catch {
       setFormStatus("error");
     }
@@ -124,10 +124,10 @@ export default function ContactSection() {
                 Email Us
               </span>
               <a
-                href="mailto:hello@splita.co.za"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="text-white hover:text-gold transition-colors duration-150 text-sm"
               >
-                hello@splita.co.za
+                {CONTACT_EMAIL}
               </a>
             </div>
 

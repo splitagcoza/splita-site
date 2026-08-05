@@ -9,7 +9,6 @@ import TeamSection from "@/components/sections/TeamSection";
 import ClientsSection from "@/components/sections/ClientsSection";
 import TestimoniesSection from "@/components/sections/TestimoniesSection";
 import FaqSection from "@/components/sections/FAQ";
-import DonateSection from "@/components/sections/DonateSection";
 import CtaSection from "@/components/sections/CTA";
 import ContactSection from "@/components/sections/ContactSection";
 
@@ -27,7 +26,6 @@ export default function ArtistsPage() {
       <ClientsSection />
       <TestimoniesSection />
       <FaqSection />
-      <DonateSection />
       <CtaSection />
       <ContactSection />
     </main>
