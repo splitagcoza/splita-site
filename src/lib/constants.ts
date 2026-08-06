@@ -11,6 +11,11 @@ export const NAV_LINKS = [
   { label: "Contact Us", href: "/contact" },
 ];
 
+/** Nav links shown only when the user is authenticated. */
+export const APP_NAV_LINKS = [
+  { label: "Generate Split-Sheet", href: "/split" },
+];
+
 export const CTA_PRIMARY = "Get Started";
 export const CTA_SECONDARY = "Learn More";
 
