@@ -6,7 +6,7 @@ export const metadata = {
     "Learn how SPLITA collects, stores, uses, and protects your personal information in accordance with POPIA and ECTA.",
 };
 
-const LAST_UPDATED = "June 2026";
+const LAST_UPDATED = "August 2026";
 
 export default function PrivacyPage() {
   return (
@@ -62,6 +62,7 @@ export default function PrivacyPage() {
             <BulletList items={[
               { label: "Device and Usage Data", body: "IP addresses, browser types, operating systems, pages viewed, and the dates/times of your visits." },
               { label: "Cookies and Tracking", body: "We use cookies to keep you logged in, remember your preferences, and analyse website traffic. You can manage cookie preferences via your browser settings." },
+              { label: "Google Analytics", body: "We use Google Analytics 4 (provided by Google LLC) to understand how visitors interact with our website. Google Analytics collects anonymised data such as pages visited, session duration, and general location (country/city level). Google may process this data on servers outside South Africa. You can opt out by installing the Google Analytics Opt-out Browser Add-on at tools.google.com/dlpage/gaoptout." },
             ]} />
           </Subsection>
         </Section>
