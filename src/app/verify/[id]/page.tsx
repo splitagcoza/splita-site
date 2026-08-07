@@ -18,7 +18,7 @@ interface ApiEnvelope {
 
 async function getVerification(id: string): Promise<VerifyResponse> {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "https://api.splita.co.za";
-  const res = await fetch(`${apiUrl}/api/v1/verify/${id}`, {
+  const res = await fetch(`${apiUrl}/api/v1/verify/${encodeURIComponent(id)}`, {
     next: { revalidate: 60 }, // cache for 60s
   });
   if (!res.ok) return { valid: false, document_type: "split_sheet", document_id: id };

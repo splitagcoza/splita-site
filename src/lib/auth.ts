@@ -21,10 +21,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.providerAccountId = account.providerAccountId;
 
         try {
-          const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "https://api.splita.co.za";
+          const serviceToken = process.env.INTERNAL_SERVICE_SECRET;
           const res = await fetch(`${apiUrl}/api/v1/auth/sync`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              ...(serviceToken ? { "X-Service-Token": serviceToken } : {}),
+            },
             body: JSON.stringify({
               provider: account.provider,
               provider_account_id: account.providerAccountId,
