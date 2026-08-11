@@ -63,6 +63,7 @@ export const metadata: Metadata = {
       "Create legally recognised split sheets and beat sale certificates — simple, affordable, and built for Africa.",
     images: ["/images/og-image.png"],
   },
+  manifest: "/site.webmanifest",
 };
 
 export const viewport: Viewport = {
