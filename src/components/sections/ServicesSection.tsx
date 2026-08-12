@@ -12,7 +12,7 @@ const SERVICES = [
   {
     icon: "📄",
     title: "Beat Sale Certificates",
-    body: "Generate airtight certificates for exclusive, non-exclusive, and lease deals. Specify usage rights, territory, and expiry — no lawyer required.",
+    body: "Generate airtight certificates for exclusive, non-exclusive, and lease deals. Specify usage rights, territory, and expiry - no lawyer required.",
   },
   {
     icon: "🌍",
@@ -22,12 +22,12 @@ const SERVICES = [
   {
     icon: "🔒",
     title: "Tamper-Evident PDFs",
-    body: "Every document carries a cryptographic signature and a unique verification URL. Anyone — a label, a lawyer, a streaming platform — can confirm authenticity instantly.",
+    body: "Every document carries a cryptographic signature and a unique verification URL. Anyone - a label, a lawyer, a streaming platform - can confirm authenticity instantly.",
   },
   {
     icon: "✉️",
     title: "Collaborator Invitations",
-    body: "Invite co-writers, producers, and featured artists by email or link. They review, sign, and download — no account required on their end.",
+    body: "Invite co-writers, producers, and featured artists by email or link. They review, sign, and download - no account required on their end.",
   },
 ];
 
@@ -48,7 +48,7 @@ export default function ServicesSection() {
           Everything You Need to Protect Your Work
         </h2>
         <p className="text-gray-300 text-base leading-relaxed">
-          From your first collaboration to your hundredth release — SPLITA
+          From your first collaboration to your hundredth release - SPLITA
           covers every document African creators need to stay legally protected.
         </p>
       </div>

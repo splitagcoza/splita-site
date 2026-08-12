@@ -8,7 +8,7 @@ const PLATFORMS = [
     icon: "🌐",
     title: "Web App",
     subtitle: "Browser + installable on your phone",
-    body: "Use SPLITA in any browser — no download needed. You can also add it to your phone's home screen for a full app-like experience, on both Android and iOS.",
+    body: "Use SPLITA in any browser - no download needed. You can also add it to your phone's home screen for a full app-like experience, on both Android and iOS.",
     badge: "Available Now",
     badgeAvailable: true,
   },

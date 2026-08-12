@@ -237,7 +237,7 @@ export default function SplitSheetForm() {
           </a>
         ) : (
           <p className="text-xs text-gray-400 max-w-sm">
-            Your PDF is being generated in the background — check your dashboard or email shortly.
+            Your PDF is being generated in the background - check your dashboard or email shortly.
           </p>
         )}
         <button

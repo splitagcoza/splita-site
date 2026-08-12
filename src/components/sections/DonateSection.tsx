@@ -23,7 +23,7 @@ export default function DonateSection() {
           Most music tech tools are built for North America and Europe. SPLITA
           was built for the rest of us. Your donation helps us keep the core
           platform free for emerging African artists who can&apos;t yet afford
-          legal fees — but still deserve legal protection.
+          legal fees - but still deserve legal protection.
         </p>
 
         {/* Buttons */}

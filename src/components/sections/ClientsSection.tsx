@@ -29,7 +29,7 @@ export default function ClientsSection() {
           Trusted by Creators Across Africa
         </h2>
         <p className="text-dark/60 text-base leading-relaxed">
-          From bedroom producers to independent labels — SPLITA protects
+          From bedroom producers to independent labels - SPLITA protects
           everyone who makes music together.
         </p>
       </div>

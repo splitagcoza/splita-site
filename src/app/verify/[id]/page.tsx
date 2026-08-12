@@ -42,7 +42,7 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 function fmt(iso?: string | null) {
-  if (!iso) return "—";
+  if (!iso) return "-";
   return new Date(iso).toLocaleDateString("en-ZA", {
     day: "numeric", month: "long", year: "numeric",
   });
@@ -92,7 +92,7 @@ export default async function VerifyPage({ params }: { params: { id: string } })
 
               <hr className="border-gray-100" />
 
-              {/* Details — no personal info */}
+              {/* Details - no personal info */}
               <dl className="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
                 <div className="col-span-2">
                   <dt className="text-gray-400 text-xs uppercase tracking-wide mb-1">Song / Project</dt>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import DashboardContent from "@/components/sections/DashboardContent";
 
 export const metadata = {
-  title: "Dashboard — SPLITA",
+  title: "Dashboard - SPLITA",
   description: "View your split sheets and track collaborator sign-off status.",
 };
 
@@ -54,7 +54,7 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        {/* Dashboard content (client component — handles data fetching) */}
+        {/* Dashboard content (client component - handles data fetching) */}
         <DashboardContent />
 
       </div>

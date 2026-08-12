@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Decline Invitation — SPLITA",
+  title: "Decline Invitation - SPLITA",
 };
 
 interface PageProps {
@@ -80,7 +80,7 @@ function ResultCard({ declined, message }: Readonly<{ declined: boolean; message
         </div>
 
         <p className="text-center text-xs text-gray-400 mt-6">
-          SPLITA — Simplifying music split sheets for African creators
+          SPLITA - Simplifying music split sheets for African creators
         </p>
       </div>
     </main>

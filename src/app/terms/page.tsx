@@ -1,7 +1,7 @@
 import { CONTACT_EMAIL } from "@/lib/constants";
 
 export const metadata = {
-  title: "Terms & Conditions — SPLITA",
+  title: "Terms & Conditions - SPLITA",
   description:
     "Read the SPLITA Terms and Conditions and User Policy governing your use of our platform, services, and digital products.",
 };

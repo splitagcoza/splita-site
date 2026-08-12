@@ -37,7 +37,7 @@ export default function CtaSection() {
 
           <p className="text-white/70 text-lg leading-relaxed max-w-xl">
             Stop relying on verbal agreements and WhatsApp screenshots. Create
-            your first legally recognised split sheet in under 3 minutes — free.
+            your first legally recognised split sheet in under 3 minutes - free.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-2">

@@ -43,7 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             token.backendToken = json?.data?.token as string | undefined;
           }
         } catch {
-          // Backend unavailable — sign-in still succeeds, API calls will fail until resolved
+          // Backend unavailable - sign-in still succeeds, API calls will fail until resolved
         }
       }
       if (profile) {

@@ -1,7 +1,7 @@
 import ContactSection from "@/components/sections/ContactSection";
 
 export const metadata = {
-  title: "Contact Us — SPLITA",
+  title: "Contact Us - SPLITA",
   description:
     "Get in touch with the SPLITA team. We are here to help African music creators protect their rights.",
 };

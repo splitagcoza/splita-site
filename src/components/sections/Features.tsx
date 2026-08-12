@@ -75,7 +75,7 @@ export default function Features() {
           Everything Built In. Nothing Bolted On.
         </h2>
         <p className="text-dark/60 text-base leading-relaxed">
-          SPLITA was designed from the ground up for the African music industry —
+          SPLITA was designed from the ground up for the African music industry -
           not adapted from tools built for markets with different legal systems.
         </p>
       </div>

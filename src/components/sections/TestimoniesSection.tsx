@@ -66,7 +66,7 @@ export default function TestimoniesSection() {
 
             {/* Attribution */}
             <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
-              {/* Avatar placeholder — TODO: replace with real photo */}
+              {/* Avatar placeholder - TODO: replace with real photo */}
               <div
                 className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0"
                 aria-hidden="true"
