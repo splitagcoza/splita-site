@@ -8,7 +8,7 @@ const FAQS = [
   {
     question: "What exactly is a split sheet?",
     answer:
-      "A split sheet is a legally binding agreement that records who owns what percentage of a song. It identifies every contributor (songwriters, producers, featured artists), their role, and their ownership share — both for the underlying composition and the master recording. When royalties are paid out, the split sheet is the source of truth.",
+      "A split sheet is a legally binding agreement that records who owns what percentage of a song. It identifies every contributor (songwriters, producers, featured artists), their role, and their ownership share - both for the underlying composition and the master recording. When royalties are paid out, the split sheet is the source of truth.",
   },
   {
     question: "Are SPLITA documents legally recognised in South Africa?",
@@ -18,7 +18,7 @@ const FAQS = [
   {
     question: "Do my collaborators need a SPLITA account to sign?",
     answer:
-      "No. You can invite anyone to sign via an email link. They review the document and sign with their full name and email address — no registration required. Once all parties have signed, every signatory automatically receives a copy of the completed PDF.",
+      "No. You can invite anyone to sign via an email link. They review the document and sign with their full name and email address - no registration required. Once all parties have signed, every signatory automatically receives a copy of the completed PDF.",
   },
   {
     question: "Can I use SPLITA for beat sale certificates?",

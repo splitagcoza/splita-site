@@ -4,7 +4,7 @@ import SplitSheetForm from "@/components/sections/SplitSheetForm";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Generate Split Sheet — SPLITA",
+  title: "Generate Split Sheet - SPLITA",
   description:
     "Create a legally recognised split sheet for your track. Add collaborators, assign ownership percentages, and generate a signed PDF in minutes.",
 };

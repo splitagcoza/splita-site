@@ -58,25 +58,7 @@ const SUBJECTS = [
 type SubmitStatus = "idle" | "sending" | "sent" | "error";
 
 export default function ContactSection() {
-  const [waitlistEmail, setWaitlistEmail] = useState("");
-  const [waitlistStatus, setWaitlistStatus] = useState<SubmitStatus>("idle");
   const [formStatus, setFormStatus] = useState<SubmitStatus>("idle");
-
-  async function handleWaitlistSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!waitlistEmail.trim()) return;
-    setWaitlistStatus("sending");
-    try {
-      const res = await fetch(`${API_BASE}/api/waitlist`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: waitlistEmail }),
-      });
-      setWaitlistStatus(res.ok ? "sent" : "error");
-    } catch {
-      setWaitlistStatus("error");
-    }
-  }
 
   async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -154,52 +136,8 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* ── Right column: waitlist + form ── */}
+          {/* ── Right column: contact form ── */}
           <div className="flex flex-col gap-8">
-
-            {/* Early Access callout */}
-            <div
-              className="rounded-xl p-6 flex flex-col gap-4"
-              style={{ backgroundColor: "rgba(201,146,10,0.12)", border: "1px solid rgba(201,146,10,0.3)" }}
-            >
-              <div className="flex flex-col gap-1">
-                <p className="text-gold font-semibold text-sm uppercase tracking-widest">
-                  Early Access
-                </p>
-                <p className="text-white text-base leading-relaxed">
-                  Be the first to know when SPLITA launches. Drop your email and we&apos;ll reach out.
-                </p>
-              </div>
-
-              {waitlistStatus === "sent" ? (
-                <p className="text-gold text-sm font-semibold">You&apos;re on the list! We&apos;ll be in touch.</p>
-              ) : (
-                <form onSubmit={handleWaitlistSubmit} className="flex flex-col sm:flex-row gap-3">
-                  <label htmlFor="waitlist-email" className="sr-only">Email address</label>
-                  <input
-                    id="waitlist-email"
-                    type="email"
-                    name="email"
-                    required
-                    placeholder="you@email.com"
-                    value={waitlistEmail}
-                    onChange={(e) => setWaitlistEmail(e.target.value)}
-                    className="flex-1 rounded-lg px-4 py-2.5 bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-gold transition-colors duration-150"
-                  />
-                  <button
-                    type="submit"
-                    disabled={waitlistStatus === "sending"}
-                    className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-5 py-2.5 text-sm bg-gold text-dark hover:bg-gold/90 flex-shrink-0 disabled:opacity-60"
-                  >
-                    {waitlistStatus === "sending" ? "Joining…" : "Join Waitlist"}
-                  </button>
-                </form>
-              )}
-              {waitlistStatus === "error" && (
-                <p className="text-red-400 text-xs">Something went wrong. Please try again.</p>
-              )}
-            </div>
-
             {/* Contact form */}
             {formStatus === "sent" ? (
               <div className="rounded-xl p-8 text-center" style={{ backgroundColor: "rgba(27,77,62,0.3)", border: "1px solid rgba(27,77,62,0.5)" }}>

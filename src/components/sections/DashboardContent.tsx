@@ -366,7 +366,7 @@ export default function DashboardContent() {
 
   const totalPages = Math.ceil(total / LIMIT);
 
-  // Session still resolving — show skeletons
+  // Session still resolving - show skeletons
   if (status === "loading") {
     return (
       <div className="space-y-4">
@@ -375,7 +375,7 @@ export default function DashboardContent() {
     );
   }
 
-  // Authenticated but no backend token — session needs refresh
+  // Authenticated but no backend token - session needs refresh
   if (status === "authenticated" && !token) {
     return (
       <div className="bg-amber-50 border border-amber-200 rounded-2xl px-8 py-10 text-center">

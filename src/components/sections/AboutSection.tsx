@@ -41,7 +41,7 @@ export default function AboutSection() {
           <p className="text-white/75 text-lg md:text-xl leading-relaxed">
             SPLITA is an African, web-first platform designed to simplify and
             secure music collaboration agreements. We provide instant, legally
-            recognised digital split sheets — eliminating disputes and ensuring
+            recognised digital split sheets - eliminating disputes and ensuring
             fair royalty distribution for every contributor.
           </p>
           <p className="text-white/75 text-lg md:text-xl leading-relaxed">

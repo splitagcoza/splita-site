@@ -75,11 +75,11 @@ export default function AuthCard({ mode }: Readonly<AuthCardProps>) {
             <p className="text-sm text-gray-500 mt-1">
               {isSignIn
                 ? "Sign in to access your split sheets"
-                : "Create your account — it's free"}
+                : "Create your account - it's free"}
             </p>
           </div>
 
-          {/* Provider buttons — all route through Auth0, which federates to the social provider */}
+          {/* Provider buttons - all route through Auth0, which federates to the social provider */}
           <div className="flex flex-col gap-3">
             {PROVIDERS.map((p) => (
               <button

@@ -33,12 +33,12 @@ export default function HeroSection() {
         <p className="font-sans text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
           SPLITA is the fastest way for African musicians, producers, and
           songwriters to create legally recognised split sheets and beat sale
-          certificates — signed, sealed, and delivered in minutes.
+          certificates - signed, sealed, and delivered in minutes.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2">
-          {/* Primary — Create Split Sheet */}
+          {/* Primary - Create Split Sheet */}
           <Link
             href="/split"
             className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm bg-gold text-dark hover:bg-gold/90"
@@ -46,7 +46,7 @@ export default function HeroSection() {
             Create Split Sheet
           </Link>
 
-          {/* External — Create Song Link */}
+          {/* External - Create Song Link */}
           <a
             href="https://song.link"
             target="_blank"
@@ -56,7 +56,7 @@ export default function HeroSection() {
             Create Song Link
           </a>
 
-          {/* Join Splita — Sign up */}
+          {/* Join Splita - Sign up */}
           <Link
             href="/sign-up"
             className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm border-2 border-gold text-gold hover:bg-gold hover:text-dark"

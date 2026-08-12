@@ -1,7 +1,7 @@
 import Pricing from "@/components/sections/Pricing";
 
 export const metadata = {
-  title: "Pricing — SPLITA",
+  title: "Pricing - SPLITA",
   description:
     "Simple, affordable pricing for split sheets and beat sale certificates. Built for African music creators.",
 };

@@ -24,7 +24,7 @@ export const CONTACT_EMAIL = "info@splita.co.za";
 
 /**
  * Social media profile URLs.
- * Update each value once the accounts are created — this is the single source
+ * Update each value once the accounts are created - this is the single source
  * of truth used by both the Footer and the Contact section.
  */
 export const SOCIAL_LINKS = {

@@ -37,7 +37,7 @@ const HORIZONS = [
       { text: "SPLITA Charts" },
       { text: "Digital Music Magazine" },
       { text: "Global PRO integrations (ASCAP, BMI, SESAC)" },
-      { text: "International expansion — India, Brazil, China" },
+      { text: "International expansion - India, Brazil, China" },
     ],
   },
 ];

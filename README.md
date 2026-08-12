@@ -1,4 +1,4 @@
-# SPLITA — Marketing Site
+# SPLITA - Marketing Site
 
 **SPLITA** is a platform for African musicians to create legally recognised split sheets and beat sale certificates. This repository is the public marketing website, built with Next.js 14 (App Router), TypeScript, and Tailwind CSS.
 
@@ -17,7 +17,7 @@ cp .env.local.example .env.local
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) — the root `/` redirects to `/artists` (the main marketing page).
+Open [http://localhost:3000](http://localhost:3000) - the root `/` redirects to `/artists` (the main marketing page).
 
 ---
 
@@ -68,7 +68,7 @@ For the apex domain (`splita.co.za`), add an `A` record pointing to `76.76.21.21
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 — App Router
+- **Framework**: Next.js 14 - App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Fonts**: Inter (body) + Playfair Display (headings)

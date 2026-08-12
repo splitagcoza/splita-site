@@ -62,7 +62,7 @@ export default function TeamSection() {
             key={member.name}
             className="flex flex-col items-center text-center gap-3"
           >
-            {/* Avatar placeholder — swap src once photos are available */}
+            {/* Avatar placeholder - swap src once photos are available */}
             <div
               className="w-20 h-20 rounded-full bg-gray-200 flex-shrink-0"
               aria-hidden="true"

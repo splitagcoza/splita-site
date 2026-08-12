@@ -12,7 +12,7 @@ const STEPS = [
   {
     number: "02",
     title: "Invite & Sign",
-    body: "Send each collaborator an email link. They review the terms and sign electronically from any device — no account needed. You get notified as each person signs.",
+    body: "Send each collaborator an email link. They review the terms and sign electronically from any device - no account needed. You get notified as each person signs.",
   },
   {
     number: "03",
@@ -38,7 +38,7 @@ export default function HowItWorks() {
           Protected in Three Steps
         </h2>
         <p className="text-dark/60 text-base leading-relaxed">
-          From studio session to legally signed document in minutes — not months.
+          From studio session to legally signed document in minutes - not months.
         </p>
       </div>
 

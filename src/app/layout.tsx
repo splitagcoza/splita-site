@@ -22,7 +22,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "SPLITA — Split Sheets for African Music Creators",
+  title: "SPLITA - Split Sheets for African Music Creators",
   description:
     "SPLITA helps African musicians and producers create legally recognised split sheets and beat sale certificates in minutes. Trusted across South Africa and beyond.",
   keywords: [
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
     canonical: "https://splita.co.za",
   },
   openGraph: {
-    title: "SPLITA — Split Sheets for African Music Creators",
+    title: "SPLITA - Split Sheets for African Music Creators",
     description:
-      "Create legally recognised split sheets and beat sale certificates — simple, affordable, and built for Africa.",
+      "Create legally recognised split sheets and beat sale certificates - simple, affordable, and built for Africa.",
     url: "https://splita.co.za",
     siteName: "SPLITA",
     images: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SPLITA — Split Sheets for African Music Creators",
+        alt: "SPLITA - Split Sheets for African Music Creators",
       },
     ],
     locale: "en_ZA",
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SPLITA — Split Sheets for African Music Creators",
+    title: "SPLITA - Split Sheets for African Music Creators",
     description:
-      "Create legally recognised split sheets and beat sale certificates — simple, affordable, and built for Africa.",
+      "Create legally recognised split sheets and beat sale certificates - simple, affordable, and built for Africa.",
     images: ["/images/og-image.png"],
   },
   manifest: "/site.webmanifest",

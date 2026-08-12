@@ -56,7 +56,7 @@ export default function Footer() {
         {/* Four-column grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
 
-          {/* Col 1 — Brand */}
+          {/* Col 1 - Brand */}
           <div className="flex flex-col gap-5">
             <Logo variant="light" size={36} />
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
@@ -79,7 +79,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 2 — Quick Links */}
+          {/* Col 2 - Quick Links */}
           <div className="flex flex-col gap-4">
             <h3 className="text-white font-semibold text-sm uppercase tracking-widest">
               Quick Links
@@ -100,7 +100,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Col 3 — Legal */}
+          {/* Col 3 - Legal */}
           <div className="flex flex-col gap-4">
             <h3 className="text-white font-semibold text-sm uppercase tracking-widest">
               Legal
@@ -119,7 +119,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4 — Contact */}
+          {/* Col 4 - Contact */}
           <div className="flex flex-col gap-4">
             <h3 className="text-white font-semibold text-sm uppercase tracking-widest">
               Contact

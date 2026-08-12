@@ -1,7 +1,7 @@
 import TestimoniesSection from "@/components/sections/TestimoniesSection";
 
 export const metadata = {
-  title: "Testimonies — SPLITA",
+  title: "Testimonies - SPLITA",
   description:
     "Hear from African musicians and producers who trust SPLITA to protect their music rights.",
 };
