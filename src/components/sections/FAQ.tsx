@@ -1,8 +1,4 @@
-"use client";
-
-import { useState } from "react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import { useInView } from "@/lib/useInView";
 
 const FAQS = [
   {
@@ -21,11 +17,6 @@ const FAQS = [
       "No. You can invite anyone to sign via an email link. They review the document and sign with their full name and email address - no registration required. Once all parties have signed, every signatory automatically receives a copy of the completed PDF.",
   },
   {
-    question: "Can I use SPLITA for beat sale certificates?",
-    answer:
-      "Absolutely. SPLITA supports exclusive, non-exclusive, and lease beat deal certificates. You can specify usage rights (commercial, streaming, sync), territory, and expiry date. The resulting document clearly records who sold what, under what terms, and for how much.",
-  },
-  {
     question: "What happens if a collaborator does not sign?",
     answer:
       "You can see the signing status of each party in real time on your dashboard. If someone has not signed you can send them a reminder directly from SPLITA. Documents remain in a pending state until all required signatories have completed the process.",
@@ -38,17 +29,10 @@ const FAQS = [
 ];
 
 function FAQItem({ question, answer }: Readonly<{ question: string; answer: string }>) {
-  const [open, setOpen] = useState(false);
-  const id = question.replaceAll(/\s+/g, "-").toLowerCase().slice(0, 30);
-
   return (
-    <div className="border-b border-dark/10 last:border-0">
-      <button
-        type="button"
-        className="flex w-full items-center justify-between py-5 text-left gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
-        aria-expanded={open}
-        aria-controls={id}
-        onClick={() => setOpen((p) => !p)}
+    <details className="group border-b border-dark/10 last:border-0">
+      <summary
+        className="flex w-full cursor-pointer list-none items-center justify-between gap-4 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded [&::-webkit-details-marker]:hidden"
       >
         <span className="font-semibold text-dark text-base leading-snug">
           {question}
@@ -58,27 +42,21 @@ function FAQItem({ question, answer }: Readonly<{ question: string; answer: stri
           height="20"
           viewBox="0 0 20 20"
           fill="none"
-          className={`flex-shrink-0 text-gold transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className="flex-shrink-0 text-gold transition-transform duration-200 group-open:rotate-180"
           aria-hidden="true"
         >
           <path d="M5 7.5l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-      </button>
+      </summary>
 
-      <section
-        id={id}
-        aria-label={question}
-        className={`overflow-hidden transition-all duration-300 ease-out ${open ? "max-h-96 pb-5" : "max-h-0"}`}
-      >
+      <div className="pb-5">
         <p className="text-dark/60 text-sm leading-relaxed">{answer}</p>
-      </section>
-    </div>
+      </div>
+    </details>
   );
 }
 
 export default function FaqSection() {
-  const [ref, inView] = useInView();
-
   return (
     <SectionWrapper id="faq" className="bg-white">
       <div className="max-w-3xl mx-auto">
@@ -99,12 +77,7 @@ export default function FaqSection() {
         </div>
 
         {/* Accordion */}
-        <div
-          ref={ref}
-          className={`transition-all duration-700 ease-out ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
+        <div>
           {FAQS.map((faq) => (
             <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
           ))}

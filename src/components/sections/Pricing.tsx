@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import { useInView } from "@/lib/useInView";
 
 interface Feature {
   text: string;
   soon?: boolean;
 }
 
-const PLANS: {
+interface Plan {
   name: string;
   price: string;
   period: string;
@@ -18,14 +17,16 @@ const PLANS: {
   cta: string;
   ctaHref: string;
   highlight: boolean;
-}[] = [
+}
+
+const SPLIT_SHEET_PLANS: Plan[] = [
   {
     name: "Free",
     price: "R0",
     period: "per month",
     description: "For artists just getting started with protecting their work.",
     features: [
-      { text: "5 split sheets per month" },
+      { text: "3 split sheets per month" },
       { text: "Email delivery to all signatories" },
       { text: "Basic PDF download" },
     ],
@@ -90,7 +91,72 @@ function CheckIcon() {
 }
 
 export default function Pricing() {
-  const [ref, inView] = useInView();
+  const renderPlans = (plans: Plan[]) => (
+    <div
+      className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start"
+    >
+      {plans.map((plan) => (
+        <div
+          key={plan.name}
+          className={`relative flex flex-col gap-6 rounded-2xl p-8 ${
+            plan.highlight
+              ? "bg-green text-white shadow-xl ring-2 ring-gold"
+              : "bg-white text-dark shadow-md"
+          }`}
+        >
+          {plan.highlight && (
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold bg-gold text-dark px-4 py-1 rounded-full uppercase tracking-widest">
+              Most Popular
+            </span>
+          )}
+
+          <div className="flex flex-col gap-1">
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-gold">
+              {plan.name}
+            </h3>
+            <div className="flex items-end gap-1">
+              <span className={`font-bold text-4xl font-serif ${plan.highlight ? "text-white" : "text-dark"}`}>
+                {plan.price}
+              </span>
+              <span className={`text-sm mb-1 ${plan.highlight ? "text-white/60" : "text-dark/50"}`}>
+                /{plan.period}
+              </span>
+            </div>
+            <p className={`text-sm leading-relaxed mt-1 ${plan.highlight ? "text-white/70" : "text-dark/60"}`}>
+              {plan.description}
+            </p>
+          </div>
+
+          <ul className="flex flex-col gap-2.5 flex-1">
+            {plan.features.map((feature) => (
+              <li key={feature.text} className={`flex items-start gap-2.5 text-sm leading-relaxed ${plan.highlight ? "text-white/80" : "text-dark/70"}`}>
+                <CheckIcon />
+                <span>
+                  {feature.text}
+                  {feature.soon && (
+                    <span className="ml-2 text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-gold/40 text-gold/70 align-middle">
+                      Soon
+                    </span>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            href={plan.ctaHref}
+            className={`inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm ${
+              plan.highlight
+                ? "bg-gold text-dark hover:bg-gold/90"
+                : "border-2 border-dark text-dark hover:bg-dark hover:text-light"
+            }`}
+          >
+            {plan.cta}
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <SectionWrapper id="pricing" className="bg-light">
@@ -110,82 +176,18 @@ export default function Pricing() {
         </p>
       </div>
 
-      {/* Plan cards */}
-      <div
-        ref={ref}
-        className={`grid grid-cols-1 md:grid-cols-3 gap-8 items-start transition-all duration-700 ease-out ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
-      >
-        {PLANS.map((plan) => (
-          <div
-            key={plan.name}
-            className={`relative flex flex-col gap-6 rounded-2xl p-8 ${
-              plan.highlight
-                ? "bg-green text-white shadow-xl ring-2 ring-gold"
-                : "bg-white text-dark shadow-md"
-            }`}
-          >
-            {plan.highlight && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold bg-gold text-dark px-4 py-1 rounded-full uppercase tracking-widest">
-                Most Popular
-              </span>
-            )}
-
-            {/* Plan name + price */}
-            <div className="flex flex-col gap-1">
-              <h3
-                className="font-semibold text-sm uppercase tracking-widest text-gold"
-              >
-                {plan.name}
-              </h3>
-              <div className="flex items-end gap-1">
-                <span className={`font-bold text-4xl font-serif ${plan.highlight ? "text-white" : "text-dark"}`}>
-                  {plan.price}
-                </span>
-                <span className={`text-sm mb-1 ${plan.highlight ? "text-white/60" : "text-dark/50"}`}>
-                  /{plan.period}
-                </span>
-              </div>
-              <p className={`text-sm leading-relaxed mt-1 ${plan.highlight ? "text-white/70" : "text-dark/60"}`}>
-                {plan.description}
-              </p>
-            </div>
-
-            {/* Features */}
-            <ul className="flex flex-col gap-2.5 flex-1">
-              {plan.features.map((f) => (
-                <li key={f.text} className={`flex items-start gap-2.5 text-sm leading-relaxed ${plan.highlight ? "text-white/80" : "text-dark/70"}`}>
-                  <CheckIcon />
-                  <span>
-                    {f.text}
-                    {f.soon && (
-                      <span className="ml-2 text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-gold/40 text-gold/70 align-middle">
-                        Soon
-                      </span>
-                    )}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA */}
-            <Link
-              href={plan.ctaHref}
-              className={`inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm ${
-                plan.highlight
-                  ? "bg-gold text-dark hover:bg-gold/90"
-                  : "border-2 border-dark text-dark hover:bg-dark hover:text-light"
-              }`}
-            >
-              {plan.cta}
-            </Link>
-          </div>
-        ))}
+      <div className="flex flex-col gap-5 mb-4">
+        <h3 className="font-serif font-bold text-dark text-2xl md:text-3xl">
+          Split Sheets
+        </h3>
+        <p className="text-dark/60 text-sm leading-relaxed max-w-2xl">
+          Create, approve, and download legally recognised split sheets for your collaborations.
+        </p>
       </div>
+      {renderPlans(SPLIT_SHEET_PLANS)}
 
       <p className="text-center text-dark/40 text-xs mt-10">
-        All prices in South African Rand (ZAR). VAT may apply.
+        Prices are in South African Rand (ZAR).
       </p>
     </SectionWrapper>
   );

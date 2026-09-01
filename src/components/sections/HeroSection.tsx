@@ -32,8 +32,9 @@ export default function HeroSection() {
         {/* Subheadline */}
         <p className="font-sans text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
           SPLITA is the fastest way for African musicians, producers, and
-          songwriters to create legally recognised split sheets and beat sale
-          certificates - signed, sealed, and delivered in minutes.
+          songwriters to create a legally recognised split sheet for every
+          collaboration - approved, signed, and delivered in minutes. Beat sale
+          certificates are next.
         </p>
 
         {/* CTAs */}

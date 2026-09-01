@@ -73,6 +73,7 @@ export default function SplitSheetForm() {
   const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [mainArtist, setMainArtist] = useState("");
+  const [genre, setGenre] = useState("");
   const [masterOwner, setMasterOwner] = useState("");
   const [isrc, setIsrc] = useState("");
   const [featuredArtists, setFeaturedArtists] = useState<string[]>([]);
@@ -129,13 +130,20 @@ export default function SplitSheetForm() {
     const errs: Record<string, string> = {};
     if (!title.trim()) errs.title = "Song title is required.";
     if (!mainArtist.trim()) errs.mainArtist = "Main artist name is required.";
+    if (!genre.trim()) errs.genre = "Genre is required.";
     if (!pctOk) {
       errs.percentage = `Percentages must add up to exactly 100%. Currently: ${totalPct.toFixed(2)}%`;
     }
     collaborators.forEach((c, i) => {
       if (!c.name.trim()) errs[`collab_name_${i}`] = "Required";
       if (!c.role.trim()) errs[`collab_role_${i}`] = "Required";
-      if (!c.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email))
+      const emailParts = c.email.trim().split("@");
+      if (
+        emailParts.length !== 2 ||
+        !emailParts[0] ||
+        !emailParts[1] ||
+        !emailParts[1].includes(".")
+      )
         errs[`collab_email_${i}`] = "Valid email required";
       if (!c.percentage || Number.isNaN(Number.parseFloat(c.percentage)))
         errs[`collab_pct_${i}`] = "Required";
@@ -155,6 +163,7 @@ export default function SplitSheetForm() {
     const payload = {
       title: title.trim(),
       main_artist: mainArtist.trim(),
+      genre: genre.trim(),
       ...(featuredArtists.length > 0 && { featured_artists: featuredArtists }),
       ...(masterOwner.trim() && { master_owner: masterOwner.trim() }),
       ...(isrc.trim() && { isrc_optional: isrc.trim() }),
@@ -241,9 +250,10 @@ export default function SplitSheetForm() {
           </p>
         )}
         <button
+          type="button"
           onClick={() => {
             setResult(null);
-            setTitle(""); setMainArtist(""); setMasterOwner(""); setIsrc("");
+            setTitle(""); setMainArtist(""); setGenre(""); setMasterOwner(""); setIsrc("");
             setFeaturedArtists([]); setCollaborators([EMPTY_COLLABORATOR()]);
           }}
           className="text-sm text-gold underline hover:no-underline"
@@ -295,6 +305,21 @@ export default function SplitSheetForm() {
               className={inputClass(!!fieldErrors.mainArtist)}
             />
             {fieldErrors.mainArtist && <p className="mt-1 text-xs text-red">{fieldErrors.mainArtist}</p>}
+          </div>
+
+          {/* Genre */}
+          <div>
+            <FieldLabel htmlFor="genre">Genre</FieldLabel>
+            <input
+              id="genre"
+              type="text"
+              value={genre}
+              onChange={(e) => { setGenre(e.target.value); setFieldErrors((p) => ({ ...p, genre: "" })); }}
+              placeholder="e.g. Amapiano"
+              maxLength={100}
+              className={inputClass(!!fieldErrors.genre)}
+            />
+            {fieldErrors.genre && <p className="mt-1 text-xs text-red">{fieldErrors.genre}</p>}
           </div>
 
           {/* Master Owner */}

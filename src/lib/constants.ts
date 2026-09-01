@@ -1,7 +1,7 @@
 export const SITE_NAME = "SPLITA";
 
 export const SITE_TAGLINE =
-  "Legally recognised split sheets and beat sale certificates for African musicians.";
+  "Legally recognised split sheets for African musicians.";
 
 export const NAV_LINKS = [
   { label: "Generate Split-Sheet", href: "/split" },

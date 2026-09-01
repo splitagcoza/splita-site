@@ -24,11 +24,10 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "SPLITA - Split Sheets for African Music Creators",
   description:
-    "SPLITA helps African musicians and producers create legally recognised split sheets and beat sale certificates in minutes. Trusted across South Africa and beyond.",
+    "SPLITA helps African musicians and producers create legally recognised split sheets in minutes. Trusted across South Africa and beyond.",
   keywords: [
     "split sheet",
     "music split sheet",
-    "beat sale certificate",
     "music rights South Africa",
     "African music creators",
     "music publishing",
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SPLITA - Split Sheets for African Music Creators",
     description:
-      "Create legally recognised split sheets and beat sale certificates - simple, affordable, and built for Africa.",
+      "Create legally recognised split sheets - simple, affordable, and built for Africa.",
     url: "https://splita.co.za",
     siteName: "SPLITA",
     images: [
@@ -60,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SPLITA - Split Sheets for African Music Creators",
     description:
-      "Create legally recognised split sheets and beat sale certificates - simple, affordable, and built for Africa.",
+      "Create legally recognised split sheets - simple, affordable, and built for Africa.",
     images: ["/images/og-image.png"],
   },
   manifest: "/site.webmanifest",
@@ -109,7 +108,7 @@ export default function RootLayout({
                 url: "https://splita.co.za",
                 logo: "https://splita.co.za/images/splita-logo.png",
                 description:
-                  "SPLITA helps African musicians and producers create legally recognised split sheets and beat sale certificates in minutes.",
+                  "SPLITA helps African musicians and producers create legally recognised split sheets in minutes.",
                 contactPoint: {
                   "@type": "ContactPoint",
                   email: "info@splita.co.za",

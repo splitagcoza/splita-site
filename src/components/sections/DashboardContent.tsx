@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 
@@ -339,6 +339,10 @@ export default function DashboardContent() {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const json = await res.json();
+        if (res.status === 401) {
+          await signOut({ callbackUrl: "/sign-in" });
+          return;
+        }
         if (!res.ok) {
           throw new Error(
             (json?.error?.message as string | undefined) ??

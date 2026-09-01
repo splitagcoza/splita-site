@@ -12,9 +12,9 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "I deal with dozens of beat deals a year. Before SPLITA I was relying on WhatsApp messages as proof. Now every sale has a signed certificate and I can prove the terms in writing.",
+      "My co-writers are scattered across three cities. SPLITA let us lock in the ownership split the same day we finished the song, and everyone had a signed copy before it even hit the studio.",
     name: "DJ Kelechi",
-    role: "Beat Maker & Songwriter, Lagos",
+    role: "Songwriter & Producer, Lagos",
   },
   {
     quote:
