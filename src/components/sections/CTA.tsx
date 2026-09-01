@@ -19,7 +19,7 @@ export default function CtaSection() {
         <div
           ref={ref}
           className={`flex flex-col items-center gap-6 transition-all duration-700 ease-out ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-8"
           }`}
         >
           <p

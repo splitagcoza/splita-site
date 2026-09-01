@@ -6,18 +6,18 @@ import { useInView } from "@/lib/useInView";
 const STEPS = [
   {
     number: "01",
-    title: "Create Your Document",
-    body: "Choose a split sheet or beat sale certificate. Fill in the track details, contributor roles, and ownership percentages. Takes under 3 minutes.",
+    title: "Create Your Split Sheet",
+    body: "Enter the track details, add every contributor, and assign ownership percentages. Takes under 3 minutes.",
   },
   {
     number: "02",
     title: "Invite & Sign",
-    body: "Send each collaborator an email link. They review the terms and sign electronically from any device - no account needed. You get notified as each person signs.",
+    body: "Send each collaborator an email link. They review the terms and approve or reject electronically from any device - no account needed.",
   },
   {
     number: "03",
-    title: "Download & Register",
-    body: "Once everyone has signed, SPLITA generates a tamper-evident PDF instantly. Use it to register your work with SAMRO, CAPASSO, or any DSP.",
+    title: "Download Your Certificate",
+    body: "Once everyone has approved, SPLITA generates a tamper-evident PDF. Keep it for your records and use it when registering your work.",
   },
 ];
 
@@ -46,7 +46,7 @@ export default function HowItWorks() {
       <div
         ref={ref}
         className={`grid grid-cols-1 md:grid-cols-3 gap-10 relative transition-all duration-700 ease-out ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-8"
         }`}
       >
         {/* Connector line (desktop only) */}

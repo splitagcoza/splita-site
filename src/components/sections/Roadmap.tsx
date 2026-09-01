@@ -9,7 +9,6 @@ const HORIZONS = [
     color: "#C9920A",
     items: [
       { text: "Split Sheet Generator", done: true },
-      { text: "Beat Sale Certificates", done: true },
       { text: "Song Link Generator" },
       { text: "Bio / One-Page Generator" },
       { text: "Pilot with select SA labels" },
@@ -25,6 +24,7 @@ const HORIZONS = [
       { text: "Direct integration with SAMRO, SAMPRA & CAPASSO" },
       { text: "Pan-African expansion" },
       { text: "Partnerships with labels, schools & music camps" },
+      { text: "Beat Sale Certificates" },
       { text: "Beat Selling Platform" },
     ],
   },

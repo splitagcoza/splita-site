@@ -10,11 +10,6 @@ const SERVICES = [
     body: "Define ownership percentages, roles (writer, producer, featured artist), and signing order. Every contributor gets an email copy the moment the last signature lands.",
   },
   {
-    icon: "📄",
-    title: "Beat Sale Certificates",
-    body: "Generate airtight certificates for exclusive, non-exclusive, and lease deals. Specify usage rights, territory, and expiry - no lawyer required.",
-  },
-  {
     icon: "🌍",
     title: "Pan-African Recognition",
     body: "Documents are structured to meet SAMRO, CAPASSO, CISAC, and major DSP submission requirements, so your paperwork holds up wherever the music travels.",

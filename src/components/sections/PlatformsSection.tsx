@@ -16,7 +16,7 @@ const PLATFORMS = [
     icon: "📄",
     title: "PDF Export",
     subtitle: "Download & share anywhere",
-    body: "Every split sheet and beat sale certificate is generated as a professionally formatted, legally worded PDF you can sign, save, and share instantly.",
+    body: "Every split sheet is generated as a professionally formatted, legally worded PDF you can sign, save, and share instantly.",
     badge: "Available Now",
     badgeAvailable: true,
   },

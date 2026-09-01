@@ -28,7 +28,6 @@ const FEATURE_GROUPS = [
     heading: "Documents",
     features: [
       "Split sheet (songwriting & master ownership)",
-      "Beat sale certificate (exclusive, non-exclusive, lease)",
       "Producer agreement",
       "Ghost-producer agreement",
       "Featured artist release form",
@@ -84,7 +83,7 @@ export default function Features() {
       <div
         ref={ref}
         className={`grid grid-cols-1 md:grid-cols-3 gap-10 transition-all duration-700 ease-out ${
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          inView ? "opacity-100 translate-y-0" : "opacity-100 translate-y-8"
         }`}
       >
         {FEATURE_GROUPS.map((group) => (
