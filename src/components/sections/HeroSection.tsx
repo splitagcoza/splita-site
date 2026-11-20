@@ -4,14 +4,14 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-6 pt-28 pb-24 sm:pt-32 overflow-hidden"
       style={{
         backgroundColor: "#2C1810",
         backgroundImage:
           "repeating-linear-gradient(135deg, rgba(201,146,10,0.05) 0px, rgba(201,146,10,0.05) 1px, transparent 1px, transparent 60px)",
       }}
     >
-      <div className="relative z-10 flex flex-col items-center max-w-4xl mx-auto gap-6">
+      <div className="relative z-10 flex flex-col items-center max-w-4xl mx-auto gap-5 sm:gap-6">
         {/* Eyebrow */}
         <p
           className="text-xs font-semibold uppercase tracking-widest"
@@ -30,7 +30,7 @@ export default function HeroSection() {
         </h1>
 
         {/* Subheadline */}
-        <p className="font-sans text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+        <p className="font-sans text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
           SPLITA is the fastest way for African musicians, producers, and
           songwriters to create a legally recognised split sheet for every
           collaboration - approved, signed, and delivered in minutes. Beat sale
@@ -42,7 +42,7 @@ export default function HeroSection() {
           {/* Primary - Create Split Sheet */}
           <Link
             href="/split"
-            className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm bg-gold text-dark hover:bg-gold/90"
+            className="w-full sm:w-auto min-h-11 inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm bg-gold text-dark hover:bg-gold/90"
           >
             Create Split Sheet
           </Link>
@@ -52,7 +52,7 @@ export default function HeroSection() {
             href="https://song.link"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm border-2 border-white text-white hover:bg-white hover:text-dark"
+            className="w-full sm:w-auto min-h-11 inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm border-2 border-white text-white hover:bg-white hover:text-dark"
           >
             Create Song Link
           </a>
@@ -60,7 +60,7 @@ export default function HeroSection() {
           {/* Join Splita - Sign up */}
           <Link
             href="/sign-up"
-            className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm border-2 border-gold text-gold hover:bg-gold hover:text-dark"
+            className="w-full sm:w-auto min-h-11 inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 text-sm border-2 border-gold text-gold hover:bg-gold hover:text-dark"
           >
             Join Splita
           </Link>

@@ -11,7 +11,7 @@ export default function Button({
   ...props
 }: Readonly<ButtonProps>) {
   const base =
-    "inline-flex items-center justify-center rounded-lg font-semibold transition-colors px-6 py-3";
+    "inline-flex min-h-11 items-center justify-center rounded-lg font-semibold transition-colors px-6 py-3 text-sm sm:text-base";
   const variants = {
     primary: "bg-gold text-dark hover:bg-gold/90",
     secondary: "border-2 border-gold text-gold hover:bg-gold hover:text-dark",

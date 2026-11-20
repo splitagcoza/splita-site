@@ -398,7 +398,7 @@ export default function SplitSheetForm() {
               <button
                 type="button"
                 onClick={addFeatured}
-                className="px-4 py-2.5 rounded-lg text-sm font-semibold bg-gray-100 text-dark hover:bg-gray-200 transition-colors whitespace-nowrap"
+                className="min-h-11 px-4 py-2.5 rounded-lg text-sm font-semibold bg-gray-100 text-dark hover:bg-gray-200 transition-colors whitespace-nowrap"
               >
                 Add
               </button>
@@ -458,7 +458,7 @@ export default function SplitSheetForm() {
                   <button
                     type="button"
                     onClick={() => removeCollaborator(i)}
-                    className="text-xs text-gray-400 hover:text-red transition-colors"
+                    className="min-h-11 px-3 text-sm text-gray-500 hover:text-red transition-colors"
                   >
                     Remove
                   </button>
@@ -541,7 +541,7 @@ export default function SplitSheetForm() {
         <button
           type="button"
           onClick={addCollaborator}
-          className="self-start inline-flex items-center gap-2 rounded-lg border border-dashed border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-500 hover:border-green hover:text-green transition-colors"
+          className="self-start min-h-11 inline-flex items-center gap-2 rounded-lg border border-dashed border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-500 hover:border-green hover:text-green transition-colors"
         >
           <span aria-hidden="true">+</span> Add Collaborator
         </button>
@@ -559,7 +559,7 @@ export default function SplitSheetForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3 font-semibold text-sm text-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="min-h-11 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3 font-semibold text-sm text-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
           style={{ backgroundColor: "#C9920A" }}
         >
           {submitting ? (
@@ -574,7 +574,7 @@ export default function SplitSheetForm() {
             "Generate Split Sheet"
           )}
         </button>
-        <p className="text-xs text-gray-400 text-center sm:text-left">
+        <p className="text-sm text-gray-500 text-center sm:text-left">
           All collaborators will receive an email invitation to sign.
         </p>
       </div>

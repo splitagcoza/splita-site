@@ -1,7 +1,7 @@
 "use client";
 
 import { signOut, useSession } from "next-auth/react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -94,9 +94,9 @@ function CollaboratorProgress({ collaborators }: Readonly<{ collaborators: Colla
   const rejected = collaborators.filter((c) => c.accepted_status === "rejected").length;
 
   return (
-    <p className="text-xs text-gray-400 mt-1">
+    <p className="text-sm text-gray-500 mt-1">
       {accepted}/{total} signed
-      {rejected > 0 && <span className="text-red-500 ml-2">{rejected} declined</span>}
+      {rejected > 0 && <span className="text-red-600 ml-2">{rejected} declined</span>}
     </p>
   );
 }
@@ -133,6 +133,7 @@ function SplitSheetCard({
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [resending, setResending] = useState(false);
   const [resendMsg, setResendMsg] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   const handleDownload = async () => {
     setDownloading(true);
@@ -188,7 +189,7 @@ function SplitSheetCard({
             </h2>
             <StatusBadge status={sheet.status} />
           </div>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
             {sheet.main_artist}
             {sheet.featured_artists?.length > 0 &&
               ` ft. ${sheet.featured_artists.join(", ")}`}
@@ -206,8 +207,8 @@ function SplitSheetCard({
       </div>
 
       {/* Collaborators table */}
-      {sheet.collaborators.length > 0 ? (
-        <div className="overflow-x-auto">
+      {expanded && sheet.collaborators.length > 0 ? (
+        <div className="overflow-x-auto" id={`collaborators-${sheet.id}`}>
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 text-xs font-semibold text-gray-400 uppercase tracking-wider">
@@ -222,7 +223,7 @@ function SplitSheetCard({
                 <tr key={c.id} className="hover:bg-gray-50/50 transition-colors">
                   <td className="px-6 py-3.5">
                     <p className="font-medium text-dark">{c.name}</p>
-                    <p className="text-xs text-gray-400">{c.email}</p>
+                    <p className="text-xs text-gray-500">{c.email}</p>
                   </td>
                   <td className="px-6 py-3.5 text-gray-500">{c.role}</td>
                   <td className="px-6 py-3.5 text-right font-semibold text-dark">
@@ -237,35 +238,46 @@ function SplitSheetCard({
           </table>
         </div>
       ) : (
-        <p className="px-6 py-4 text-sm text-gray-400">No collaborators added.</p>
+        expanded && <p className="px-6 py-4 text-sm text-gray-500">No collaborators added.</p>
       )}
 
       {/* Card footer */}
       <div className="px-6 py-4 border-t border-gray-50 flex flex-wrap items-center gap-3">
-        {/* Download PDF */}
+        <button
+          type="button"
+          onClick={() => setExpanded((value) => !value)}
+          aria-expanded={expanded}
+          aria-controls={`collaborators-${sheet.id}`}
+          className="inline-flex min-h-11 items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+        >
+          {expanded ? "Hide details" : "View details"}
+          <svg className={`transition-transform ${expanded ? "rotate-180" : ""}`} width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+
+        {/* Open PDF */}
         {sheet.pdf_url ? (
           <button
             type="button"
             onClick={handleDownload}
             disabled={downloading}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-[#1B4D3E] text-white hover:bg-[#1B4D3E]/90 disabled:opacity-60 transition-colors"
+            className="inline-flex min-h-11 items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold bg-[#1B4D3E] text-white hover:bg-[#1B4D3E]/90 disabled:opacity-60 transition-colors"
           >
             {downloading ? (
-              "Downloading…"
+              "Opening…"
             ) : (
               <>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
+                  <path d="M14 3h7v7" /><path d="M10 14 21 3" /><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" />
                 </svg>
-                Download PDF
+                Open PDF
               </>
             )}
           </button>
         ) : (
-          <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-gray-100 text-gray-400 cursor-default">
-            PDF generating…
+          <span className="inline-flex min-h-11 items-center px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-500">
+            PDF not available
           </span>
         )}
 
@@ -275,7 +287,7 @@ function SplitSheetCard({
             type="button"
             onClick={handleResend}
             disabled={resending}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-60 transition-colors"
+            className="inline-flex min-h-11 items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-60 transition-colors"
           >
             {resending ? (
               "Sending…"
@@ -293,10 +305,10 @@ function SplitSheetCard({
 
         {/* Inline feedback */}
         {downloadError && (
-          <p className="text-xs text-red-600">{downloadError}</p>
+          <p className="text-xs text-red-600" role="alert">{downloadError}</p>
         )}
         {resendMsg && (
-          <p className={`text-xs ${resendMsg === "Invitations resent." ? "text-emerald-600" : "text-red-600"}`}>
+          <p role="status" className={`text-xs ${resendMsg === "Invitations resent." ? "text-emerald-700" : "text-red-600"}`}>
             {resendMsg}
           </p>
         )}
@@ -321,6 +333,35 @@ function SkeletonCard() {
   );
 }
 
+function SummaryCards({ sheets, total }: Readonly<{ sheets: SplitSheet[]; total: number }>) {
+  const pendingSignatures = sheets.reduce(
+    (count, sheet) => count + sheet.collaborators.filter((collaborator) => collaborator.accepted_status === "pending").length,
+    0
+  );
+  const completed = sheets.filter((sheet) => sheet.status === "completed").length;
+  const declined = sheets.reduce(
+    (count, sheet) => count + sheet.collaborators.filter((collaborator) => collaborator.accepted_status === "rejected").length,
+    0
+  );
+  const items = [
+    { label: "Total sheets", value: total, color: "text-[#1A3A6B]" },
+    { label: "Pending signatures", value: pendingSignatures, color: "text-[#C9920A]" },
+    { label: "Completed", value: completed, color: "text-[#1B4D3E]" },
+    { label: "Declined", value: declined, color: "text-[#B84A2E]" },
+  ];
+
+  return (
+    <section aria-label="Split sheet summary" className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      {items.map((item) => (
+        <div key={item.label} className="rounded-2xl border border-gray-100 bg-white px-4 py-4 shadow-sm sm:px-5">
+          <p className="text-xs font-medium text-gray-500">{item.label}</p>
+          <p className={`mt-1 text-2xl font-bold ${item.color}`}>{item.value}</p>
+        </div>
+      ))}
+    </section>
+  );
+}
+
 // ─── Main component ────────────────────────────────────────────────────────────
 
 export default function DashboardContent() {
@@ -332,23 +373,27 @@ export default function DashboardContent() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | SheetStatus>("all");
+  const [sort, setSort] = useState<"newest" | "oldest" | "title">("newest");
 
   const LIMIT = 10;
 
-  const fetchSheets = useCallback(
-    async (p: number) => {
-      setLoading(true);
-      setError(null);
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
-      try {
+  const fetchSheets = useCallback(async () => {
+    if (!token) return;
+    setLoading(true);
+    setError(null);
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+    try {
+      const fetchPage = async (pageNumber: number) => {
         const res = await fetch(
-          `${apiUrl}/api/v1/split-sheets?page=${p}&limit=${LIMIT}`,
+          `${apiUrl}/api/v1/split-sheets?page=${pageNumber}&limit=${LIMIT}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const json = await res.json();
         if (res.status === 401) {
           await signOut({ callbackUrl: "/sign-in" });
-          return;
+          throw new Error("Your session has expired.");
         }
         if (!res.ok) {
           throw new Error(
@@ -356,26 +401,65 @@ export default function DashboardContent() {
               `Request failed (${res.status})`
           );
         }
-        setSheets(json.data?.split_sheets ?? []);
-        setTotal(json.data?.pagination?.total ?? 0);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Something went wrong"
-        );
-      } finally {
-        setLoading(false);
-      }
-    },
-    [token]
-  );
+        return json;
+      };
+
+      const first = await fetchPage(1);
+      const overallTotal = first.data?.pagination?.total ?? 0;
+      const pageCount = Math.ceil(overallTotal / LIMIT);
+      const remaining = pageCount > 1
+        ? await Promise.all(Array.from({ length: pageCount - 1 }, (_, index) => fetchPage(index + 2)))
+        : [];
+      const allSheets = [
+        ...(first.data?.split_sheets ?? []),
+        ...remaining.flatMap((response) => response.data?.split_sheets ?? []),
+      ];
+
+      setSheets(allSheets);
+      setTotal(overallTotal);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }, [token]);
 
   useEffect(() => {
-    // Wait until NextAuth has finished resolving the session
-    if (status === "loading") return;
-    fetchSheets(page);
-  }, [fetchSheets, page, status]);
+    if (status === "loading" || !token) return;
+    fetchSheets();
+  }, [fetchSheets, status, token]);
 
-  const totalPages = Math.ceil(total / LIMIT);
+  useEffect(() => {
+    setPage(1);
+  }, [search, statusFilter, sort]);
+
+  const filteredSheets = useMemo(() => {
+    const query = search.trim().toLocaleLowerCase();
+    return sheets
+      .filter((sheet) => statusFilter === "all" || sheet.status === statusFilter)
+      .filter((sheet) => {
+        if (!query) return true;
+        const searchable = [
+          sheet.title,
+          sheet.main_artist,
+          ...sheet.featured_artists,
+          ...sheet.collaborators.flatMap((collaborator) => [collaborator.name, collaborator.email, collaborator.role]),
+        ].join(" ").toLocaleLowerCase();
+        return searchable.includes(query);
+      })
+      .sort((a, b) => {
+        if (sort === "title") return a.title.localeCompare(b.title);
+        const difference = new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        return sort === "newest" ? difference : -difference;
+      });
+  }, [sheets, search, sort, statusFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredSheets.length / LIMIT));
+  const visibleSheets = filteredSheets.slice((page - 1) * LIMIT, page * LIMIT);
+
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
 
   // Session still resolving - show skeletons
   if (status === "loading") {
@@ -413,8 +497,8 @@ export default function DashboardContent() {
           <span>{error}</span>
           <button
             type="button"
-            onClick={() => fetchSheets(page)}
-            className="text-xs font-semibold underline ml-4"
+            onClick={fetchSheets}
+            className="min-h-11 px-3 text-sm font-semibold underline sm:min-h-0 ml-4"
           >
             Retry
           </button>
@@ -461,14 +545,77 @@ export default function DashboardContent() {
       {/* Split sheet cards */}
       {!loading && !error && sheets.length > 0 && (
         <>
-          <div className="space-y-4">
-            {sheets.map((sheet) => (
-              <SplitSheetCard key={sheet.id} sheet={sheet} token={token!} />
-            ))}
+          <SummaryCards sheets={sheets} total={total} />
+
+          <div className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
+            <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto_auto]">
+              <div>
+                <label htmlFor="sheet-search" className="sr-only">Search split sheets</label>
+                <input
+                  id="sheet-search"
+                  type="search"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  placeholder="Search title, artist or collaborator…"
+                  className="h-10 w-full rounded-lg border border-gray-200 px-3 text-sm text-dark outline-none placeholder:text-gray-400 focus:border-[#1B4D3E] focus:ring-2 focus:ring-[#1B4D3E]/10"
+                />
+              </div>
+              <div>
+                <label htmlFor="status-filter" className="sr-only">Filter by status</label>
+                <select
+                  id="status-filter"
+                  value={statusFilter}
+                  onChange={(event) => setStatusFilter(event.target.value as "all" | SheetStatus)}
+                  className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-dark outline-none focus:border-[#1B4D3E] focus:ring-2 focus:ring-[#1B4D3E]/10"
+                >
+                  <option value="all">All statuses</option>
+                  <option value="draft">Draft</option>
+                  <option value="pending">Pending</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="sheet-sort" className="sr-only">Sort split sheets</label>
+                <select
+                  id="sheet-sort"
+                  value={sort}
+                  onChange={(event) => setSort(event.target.value as "newest" | "oldest" | "title")}
+                  className="h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-dark outline-none focus:border-[#1B4D3E] focus:ring-2 focus:ring-[#1B4D3E]/10"
+                >
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                  <option value="title">Title A-Z</option>
+                </select>
+              </div>
+            </div>
           </div>
 
+          {filteredSheets.length === 0 ? (
+            <div className="rounded-2xl border border-gray-100 bg-white px-8 py-12 text-center">
+              <h3 className="font-serif text-xl font-bold text-dark">No matching split sheets</h3>
+              <p className="mt-2 text-sm text-gray-500">Try a different search term or status.</p>
+              <button
+                type="button"
+                onClick={() => { setSearch(""); setStatusFilter("all"); }}
+                className="mt-5 text-sm font-semibold text-[#1B4D3E] underline underline-offset-4"
+              >
+                Clear filters
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <p className="text-xs text-gray-500">
+                Showing {visibleSheets.length} of {filteredSheets.length} matching sheet{filteredSheets.length === 1 ? "" : "s"}
+              </p>
+              {visibleSheets.map((sheet) => (
+                <SplitSheetCard key={sheet.id} sheet={sheet} token={token!} />
+              ))}
+            </div>
+          )}
+
           {/* Pagination */}
-          {totalPages > 1 && (
+          {filteredSheets.length > LIMIT && (
             <div className="flex items-center justify-center gap-2 pt-2">
               <button
                 type="button"

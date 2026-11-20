@@ -10,7 +10,7 @@ export default function SectionWrapper({
   children,
 }: Readonly<SectionWrapperProps>) {
   return (
-    <section id={id} className={`py-20 ${className}`}>
+    <section id={id} className={`py-14 sm:py-20 ${className}`}>
       <div className="mx-auto max-w-6xl px-6">{children}</div>
     </section>
   );

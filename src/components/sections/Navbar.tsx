@@ -56,14 +56,14 @@ function MobileAuthControl({ session, closeMenu }: Readonly<{ session: Session |
         <Link
           href="/dashboard"
           onClick={closeMenu}
-          className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 ease-in-out px-5 py-2.5 text-sm border border-[#1B4D3E] text-[#1B4D3E] hover:bg-[#1B4D3E] hover:text-white"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg font-semibold transition-colors duration-150 ease-in-out px-5 py-2.5 text-sm border border-[#1B4D3E] text-[#1B4D3E] hover:bg-[#1B4D3E] hover:text-white"
         >
           Dashboard
         </Link>
         <button
           type="button"
           onClick={() => { signOut({ callbackUrl: "/" }); closeMenu(); }}
-          className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 ease-in-out px-5 py-2.5 text-sm border border-dark text-dark hover:bg-dark hover:text-white"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg font-semibold transition-colors duration-150 ease-in-out px-5 py-2.5 text-sm border border-dark text-dark hover:bg-dark hover:text-white"
         >
           Sign Out
         </button>
@@ -74,7 +74,7 @@ function MobileAuthControl({ session, closeMenu }: Readonly<{ session: Session |
     <Link
       href="/sign-in"
       onClick={closeMenu}
-      className="inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-150 ease-in-out px-6 py-2.5 text-sm bg-gold text-dark hover:bg-gold/90 mt-2"
+      className="inline-flex min-h-11 items-center justify-center rounded-lg font-semibold transition-all duration-150 ease-in-out px-6 py-2.5 text-sm bg-gold text-dark hover:bg-gold/90 mt-2"
       style={{ boxShadow: "0 0 14px rgba(201,146,10,0.45)" }}
     >
       Login
@@ -119,7 +119,7 @@ export default function Navbar() {
           <DesktopAuthControl session={session} transparent={transparent} />
 
           {/* Mobile hamburger */}
-          <button type="button" onClick={() => setMenuOpen((prev) => !prev)} className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen}>
+          <button type="button" onClick={() => setMenuOpen((prev) => !prev)} className="lg:hidden flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-lg" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen}>
             <span className={`block w-6 h-0.5 transition-all duration-150 ease-in-out ${transparent ? "bg-white" : "bg-dark"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
             <span className={`block w-6 h-0.5 transition-all duration-150 ease-in-out ${transparent ? "bg-white" : "bg-dark"} ${menuOpen ? "opacity-0" : ""}`} />
             <span className={`block w-6 h-0.5 transition-all duration-150 ease-in-out ${transparent ? "bg-white" : "bg-dark"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
@@ -131,7 +131,7 @@ export default function Navbar() {
       <div className={`lg:hidden overflow-hidden transition-all duration-150 ease-in-out ${menuOpen ? "max-h-screen bg-white shadow-md" : "max-h-0"}`}>
         <nav className="flex flex-col px-6 pb-6 pt-2 gap-4">
           {activeNavLinks.map((link) => (
-            <Link key={link.href} href={link.href} onClick={closeMenu} className="text-base font-medium text-dark hover:text-gold transition-colors duration-150 ease-in-out">
+            <Link key={link.href} href={link.href} onClick={closeMenu} className="flex min-h-11 items-center text-base font-medium text-dark hover:text-gold transition-colors duration-150 ease-in-out">
               {link.label}
             </Link>
           ))}

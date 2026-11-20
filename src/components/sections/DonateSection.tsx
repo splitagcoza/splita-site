@@ -7,7 +7,7 @@ export default function DonateSection() {
   const [ref, inView] = useInView();
 
   return (
-    <SectionWrapper id="donate" className="!py-24 bg-gold">
+    <SectionWrapper id="donate" className="!py-16 sm:!py-24 bg-gold">
       <div
         ref={ref}
         className={`flex flex-col items-center text-center gap-6 max-w-2xl mx-auto transition-all duration-700 ease-out ${

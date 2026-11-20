@@ -8,7 +8,7 @@ export default function CtaSection() {
   return (
     <section
       id="cta"
-      className="py-24 overflow-hidden"
+      className="py-16 sm:py-24 overflow-hidden"
       style={{
         backgroundColor: "#1B4D3E",
         backgroundImage:
@@ -43,19 +43,19 @@ export default function CtaSection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-2">
             <a
               href="/split"
-              className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-8 py-4 bg-gold text-dark hover:bg-gold/90 text-base"
+              className="inline-flex min-h-11 w-full sm:w-auto items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-8 py-4 bg-gold text-dark hover:bg-gold/90 text-base"
             >
               Create Your First Split Sheet
             </a>
             <a
               href="/pricing"
-              className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-8 py-4 border-2 border-white/30 text-white hover:border-white/60 text-base"
+              className="inline-flex min-h-11 w-full sm:w-auto items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-8 py-4 border-2 border-white/30 text-white hover:border-white/60 text-base"
             >
               View Pricing
             </a>
           </div>
 
-          <p className="text-white/40 text-xs mt-2">
+          <p className="text-white/60 text-sm sm:text-xs mt-2">
             Free forever for up to 3 documents per month. No credit card required.
           </p>
         </div>
