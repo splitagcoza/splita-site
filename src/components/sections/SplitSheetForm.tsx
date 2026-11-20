@@ -29,7 +29,15 @@ const COMMON_ROLES = [
   "Composer",
   "Lyricist",
   "A&R",
+  "Publisher",
+  "Label",
 ];
+
+const SPLIT_SHEET_TYPES = [
+  "Composition splits",
+  "Masters splits",
+  "Performance splits",
+] as const;
 
 const EMPTY_COLLABORATOR = (): Collaborator => ({
   id: crypto.randomUUID(),
@@ -74,6 +82,7 @@ export default function SplitSheetForm() {
   const [title, setTitle] = useState("");
   const [mainArtist, setMainArtist] = useState("");
   const [genre, setGenre] = useState("");
+  const [splitSheetType, setSplitSheetType] = useState("");
   const [masterOwner, setMasterOwner] = useState("");
   const [isrc, setIsrc] = useState("");
   const [featuredArtists, setFeaturedArtists] = useState<string[]>([]);
@@ -131,6 +140,7 @@ export default function SplitSheetForm() {
     if (!title.trim()) errs.title = "Song title is required.";
     if (!mainArtist.trim()) errs.mainArtist = "Main artist name is required.";
     if (!genre.trim()) errs.genre = "Genre is required.";
+    if (!splitSheetType) errs.splitSheetType = "Split sheet type is required.";
     if (!pctOk) {
       errs.percentage = `Percentages must add up to exactly 100%. Currently: ${totalPct.toFixed(2)}%`;
     }
@@ -164,6 +174,7 @@ export default function SplitSheetForm() {
       title: title.trim(),
       main_artist: mainArtist.trim(),
       genre: genre.trim(),
+      split_sheet_type: splitSheetType,
       ...(featuredArtists.length > 0 && { featured_artists: featuredArtists }),
       ...(masterOwner.trim() && { master_owner: masterOwner.trim() }),
       ...(isrc.trim() && { isrc_optional: isrc.trim() }),
@@ -254,6 +265,7 @@ export default function SplitSheetForm() {
           onClick={() => {
             setResult(null);
             setTitle(""); setMainArtist(""); setGenre(""); setMasterOwner(""); setIsrc("");
+            setSplitSheetType("");
             setFeaturedArtists([]); setCollaborators([EMPTY_COLLABORATOR()]);
           }}
           className="text-sm text-gold underline hover:no-underline"
@@ -320,6 +332,26 @@ export default function SplitSheetForm() {
               className={inputClass(!!fieldErrors.genre)}
             />
             {fieldErrors.genre && <p className="mt-1 text-xs text-red">{fieldErrors.genre}</p>}
+          </div>
+
+          {/* Split sheet type */}
+          <div>
+            <FieldLabel htmlFor="split_sheet_type">Split sheet type</FieldLabel>
+            <select
+              id="split_sheet_type"
+              value={splitSheetType}
+              onChange={(e) => {
+                setSplitSheetType(e.target.value);
+                setFieldErrors((p) => ({ ...p, splitSheetType: "" }));
+              }}
+              className={inputClass(!!fieldErrors.splitSheetType)}
+            >
+              <option value="">Select a split sheet type</option>
+              {SPLIT_SHEET_TYPES.map((type) => (
+                <option key={type} value={type}>{type}</option>
+              ))}
+            </select>
+            {fieldErrors.splitSheetType && <p className="mt-1 text-xs text-red">{fieldErrors.splitSheetType}</p>}
           </div>
 
           {/* Master Owner */}
