@@ -11,24 +11,21 @@ export const metadata = {
 export default async function DashboardPage() {
   const session = await auth();
   if (!session) redirect("/sign-in");
+  const firstName = session.user?.name?.trim().split(/\s+/)[0];
 
   return (
     <main className="min-h-screen pt-24 pb-16" style={{ backgroundColor: "#F9F7F4" }}>
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
 
         {/* Page header */}
         <div className="mb-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-400 hover:text-dark transition-colors mb-6"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-            Back to Home
-          </Link>
+          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs font-semibold text-gray-500">
+            <Link href="/" className="hover:text-dark transition-colors">Home</Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-dark">Dashboard</span>
+          </nav>
 
-          <div className="flex items-end justify-between gap-4">
+          <div className="flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-1"
@@ -39,10 +36,14 @@ export default async function DashboardPage() {
               <h1 className="font-serif font-bold text-3xl md:text-4xl text-dark leading-snug">
                 Split Sheets
               </h1>
+              <p className="mt-1 text-sm text-gray-500">
+                {firstName ? `Welcome back, ${firstName}. ` : "Welcome back. "}
+                Here&apos;s what needs your attention.
+              </p>
             </div>
             <Link
               href="/split"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white shrink-0 transition-colors hover:opacity-90"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white sm:shrink-0 transition-colors hover:opacity-90"
               style={{ backgroundColor: "#1B4D3E" }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

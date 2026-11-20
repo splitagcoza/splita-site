@@ -86,7 +86,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-20"
+      className="py-14 sm:py-20"
       style={{ backgroundColor: "#2C1810" }}
     >
       <div className="mx-auto max-w-6xl px-6">
@@ -125,7 +125,7 @@ export default function ContactSection() {
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-gold hover:text-gold transition-colors duration-150"
+                      className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:border-gold hover:text-gold transition-colors duration-150"
                       aria-label={s.label}
                     >
                       {s.icon}
@@ -161,7 +161,7 @@ export default function ContactSection() {
                     type="text"
                     required
                     placeholder="Your full name"
-                    className="rounded-lg px-4 py-2.5 bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-gold transition-colors duration-150"
+                    className="rounded-lg min-h-11 px-4 py-3 bg-white/10 border border-white/20 text-white placeholder:text-white/50 text-base sm:text-sm focus:outline-none focus:border-gold transition-colors duration-150"
                   />
                 </div>
 
@@ -176,7 +176,7 @@ export default function ContactSection() {
                     type="email"
                     required
                     placeholder="you@email.com"
-                    className="rounded-lg px-4 py-2.5 bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-gold transition-colors duration-150"
+                    className="rounded-lg min-h-11 px-4 py-3 bg-white/10 border border-white/20 text-white placeholder:text-white/50 text-base sm:text-sm focus:outline-none focus:border-gold transition-colors duration-150"
                   />
                 </div>
 
@@ -188,7 +188,7 @@ export default function ContactSection() {
                   <select
                     id="contact-subject"
                     name="subject"
-                    className="rounded-lg px-4 py-2.5 bg-dark border border-white/20 text-white text-sm focus:outline-none focus:border-gold transition-colors duration-150 appearance-none"
+                    className="rounded-lg min-h-11 px-4 py-3 bg-dark border border-white/20 text-white text-base sm:text-sm focus:outline-none focus:border-gold transition-colors duration-150 appearance-none"
                   >
                     {SUBJECTS.map((s) => (
                       <option key={s} value={s}>{s}</option>
@@ -207,7 +207,7 @@ export default function ContactSection() {
                     rows={5}
                     required
                     placeholder="Tell us how we can help…"
-                    className="rounded-lg px-4 py-2.5 bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm focus:outline-none focus:border-gold transition-colors duration-150 resize-none"
+                    className="rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder:text-white/50 text-base sm:text-sm focus:outline-none focus:border-gold transition-colors duration-150 resize-none"
                   />
                 </div>
 
@@ -219,7 +219,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={formStatus === "sending"}
-                  className="inline-flex items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 bg-gold text-dark hover:bg-gold/90 w-full disabled:opacity-60"
+                  className="inline-flex min-h-11 items-center justify-center rounded-lg font-semibold transition-colors duration-150 px-6 py-3 bg-gold text-dark hover:bg-gold/90 w-full disabled:opacity-60"
                 >
                   {formStatus === "sending" ? "Sending…" : "Send Message"}
                 </button>
