@@ -58,7 +58,7 @@ const SPLIT_SHEET_PLANS: Plan[] = [
     description: "Everything in Pro, plus powerful industry integrations.",
     features: [
       { text: "All Pro benefits" },
-      { text: "One-click CMO notification (SAMRO, SAMPRA, CAPASSO)" },
+      { text: "One-click CMO notification (SAMRO, SAMPRA, CAPASSO)", soon: true },
       { text: "Spotify Song DNA integration", soon: true },
       { text: "Song plays reporter - Shazam, DSPs, YouTube, Radio", soon: true },
     ],

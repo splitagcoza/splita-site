@@ -24,6 +24,7 @@ interface SplitSheet {
   title: string;
   main_artist: string;
   featured_artists: string[];
+  split_sheet_type?: string;
   status: SheetStatus;
   pdf_url?: string | null;
   created_at: string;
@@ -191,6 +192,12 @@ function SplitSheetCard({
             {sheet.main_artist}
             {sheet.featured_artists?.length > 0 &&
               ` ft. ${sheet.featured_artists.join(", ")}`}
+            {sheet.split_sheet_type && (
+              <>
+                <span className="mx-1.5">·</span>
+                {sheet.split_sheet_type}
+              </>
+            )}
             <span className="mx-1.5">·</span>
             {formatDate(sheet.created_at)}
           </p>
