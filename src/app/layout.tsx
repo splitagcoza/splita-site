@@ -63,10 +63,23 @@ export const metadata: Metadata = {
     images: ["/images/og-image.png"],
   },
   manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/splita-app-icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "SPLITA",
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2C1810",
+  themeColor: "#1B4D3E",
   width: "device-width",
   initialScale: 1,
 };

@@ -2,21 +2,68 @@
   "name": "SPLITA - Split Sheets for African Music Creators",
   "short_name": "SPLITA",
   "description": "Create legally recognised split sheets and beat sale certificates in minutes.",
+  "id": "/",
+  "lang": "en-ZA",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/splita-app-icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/splita-app-icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/splita-maskable-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "theme_color": "#1B4D3E",
-  "background_color": "#2C1810",
+  "background_color": "#1B4D3E",
   "display": "standalone",
-  "start_url": "/",
-  "scope": "/"
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "orientation": "any",
+  "categories": [
+    "business",
+    "music"
+  ],
+  "shortcuts": [
+    {
+      "name": "Create a Split Sheet",
+      "short_name": "New Sheet",
+      "description": "Start a new legally recognised split sheet.",
+      "url": "/split?source=pwa-shortcut",
+      "icons": [
+        {
+          "src": "/splita-app-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Open Dashboard",
+      "short_name": "Dashboard",
+      "description": "View split sheets and signature status.",
+      "url": "/dashboard?source=pwa-shortcut",
+      "icons": [
+        {
+          "src": "/splita-app-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
 }
